@@ -40,12 +40,8 @@ def check_bound(obj_rct, scr_rct):
     return yoko, tate
 
 def main2():
-<<<<<<< HEAD
-    scr = Screen("食べろにょろにょろ", (900,1000), "fig/pg_bg.jpg")
-=======
     clock = pg.time.Clock()
     scr = Screen("食べろにょろにょろ", (1600,900), "fig/pg_bg.jpg")
->>>>>>> e3e2e6e14bd22bafe5e4fa523b1f8c9236cc50bc
 
     make_lst=mm.make_maze(18,18) #マスの数
     print (make_lst)
@@ -65,7 +61,6 @@ def main2():
     snake_lon = 3  # 蛇の長さ
     way = 1  # 蛇の運動方向
 
-<<<<<<< HEAD
     while True:
         if game:
             scr.blit()
@@ -123,10 +118,6 @@ def main2():
             for event in pg.event.get():  
                 if event.type == pg.QUIT:
                     sys.exit()
-=======
-
-
->>>>>>> e3e2e6e14bd22bafe5e4fa523b1f8c9236cc50bc
         pg.display.update()
         clock.tick(1000)
 
