@@ -27,9 +27,21 @@ class Maze:
 
     def blit(self,scr:Screen):
         scr.sfc.blit(self.sfc,self.rct)
-                
+
+def check_bound(obj_rct, scr_rct):
+    # 第1引数；敵rect
+    # 第2引数：スクリーンrect
+    # 範囲内：+1/範囲外：-1
+    yoko, tate = +1, +1
+    if obj_rct.left < scr_rct.left or scr_rct.right < obj_rct.right:
+        yoko = -1
+    if obj_rct.top < scr_rct.top or scr_rct.bottom < obj_rct.bottom:
+        tate = -1
+    return yoko, tate
+
 def main2():
-    scr = Screen("食べろにょろにょろ", (900,1000), "fig/pg_bg.jpg")
+    clock = pg.time.Clock()
+    scr = Screen("食べろにょろにょろ", (1600,900), "fig/pg_bg.jpg")
 
     make_lst=mm.make_maze(18,18) #マスの数
     print (make_lst)
@@ -37,6 +49,7 @@ def main2():
 
     color_red = pg.Color(255, 0, 0)
     color_green = pg.Color(0, 255, 0)
+    color_yello = pg.Color(255, 212, 0)
     screen = pg.display.set_mode((900, 1000)) #スクリーンの大きさ
     pg.display.set_caption("蛇")
     arr = [([0] * 41) for i in range(61)]  
@@ -47,13 +60,6 @@ def main2():
     arr[foodx][foody] = -1
     snake_lon = 3  # 蛇の長さ
     way = 1  # 蛇の運動方向
-    fonto = pg.font.Font(None,80)
-    fonto2 = pg.font.Font(None,30)
-    appnum = 3 #りんごゲットのノルマ(坂本)
-    app = fonto2.render((f"APPLE:{appnum}"),True,(0,0,0)) #残りのりんごの獲得ノルマ表示(坂本)
-    clear = fonto.render("Game Clear",True,(0,0,255))#ゲームクリアの表示(坂本)
-    gover = fonto.render("Game Over",True,(255,0,0))#ゲームオーバーの表示(坂本)
-    game = True #ゲームが続いているかのフラグ(坂本)
 
     while True:
         if game:
@@ -113,7 +119,7 @@ def main2():
                 if event.type == pg.QUIT:
                     sys.exit()
         pg.display.update()
-
+        clock.tick(1000)
 
 if __name__ == '__main__':
     pg.init()
